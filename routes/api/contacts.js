@@ -1,24 +1,26 @@
-const express = require('express')
-const router = express.Router()
+/* eslint-disable spaced-comment */
+/* eslint-disable semi */
+/* eslint-disable quotes */
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const express = require("express");
+const router = express.Router();
+const {
+  getAllContacts,
+  getOneContact,
+  updateContactById,
+  deleteContact,
+  addToContacts,
+} = require("../../controllers/contactsControllers");
+const { addPostValidation } = require("../../middlewares/validationJoi");
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get("/", getAllContacts);
 
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get("/:contactId", getOneContact);
 
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.post("/", addPostValidation, addToContacts); //валидацию добавила и сюда и в аддКонтактс - где оставлять нужно?
 
-router.patch('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.delete("/:contactId", deleteContact);
 
-module.exports = router
+router.patch("/:contactId", updateContactById);
+
+module.exports = router;
