@@ -4,14 +4,15 @@
 
 const express = require("express");
 const router = express.Router();
+const { getAllContacts } = require("../../controllers/contacts/getAllContacts");
+const { getOneContact } = require("../../controllers/contacts/getOneContact");
 const {
-  getAllContacts,
-  getOneContact,
   updateContactById,
-  deleteContact,
-  addToContacts,
-} = require("../../controllers/contactsControllers");
-const { addPostValidation } = require("../../middlewares/validationJoi");
+} = require("../../controllers/contacts/updateContactById");
+const { deleteContact } = require("../../controllers/contacts/deleteContact");
+const { addToContacts } = require("../../controllers/contacts/addToContacts");
+
+const { addPostValidation } = require("../../middlewares/validation/contacts");
 
 router.get("/", getAllContacts);
 
