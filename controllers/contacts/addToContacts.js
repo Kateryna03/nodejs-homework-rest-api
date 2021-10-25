@@ -12,4 +12,4 @@ const addToContacts = async (req, res, next) => {
   }
 };
 
-exports.module = addToContacts;
+module.exports = addToContacts;

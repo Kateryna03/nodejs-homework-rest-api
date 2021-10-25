@@ -24,4 +24,4 @@ const updateContactById = async (req, res, next) => {
   }
 };
 
-exports.module = updateContactById;
+module.exports = updateContactById;

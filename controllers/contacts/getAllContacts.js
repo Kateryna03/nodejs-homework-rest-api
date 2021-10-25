@@ -14,4 +14,4 @@ const getAllContacts = async (req, res, next) => {
   }
 };
 
-exports.module = getAllContacts;
+module.exports = getAllContacts;

@@ -16,4 +16,4 @@ const getOneContact = async (req, res, next) => {
   }
 };
 
-exports.module = getOneContact;
+module.exports = getOneContact;
