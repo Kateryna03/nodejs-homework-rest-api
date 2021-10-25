@@ -11,6 +11,13 @@ const {
 } = require("../../controllers/contacts/updateContactById");
 const { deleteContact } = require("../../controllers/contacts/deleteContact");
 const { addToContacts } = require("../../controllers/contacts/addToContacts");
+// const {
+//   getAllContacts,
+//   getOneContact,
+//   addToContacts,
+//   deleteContact,
+//   updateContactById,
+// } = require("../../controllers/contacts");
 
 const { addPostValidation } = require("../../middlewares/validation/contacts");
 

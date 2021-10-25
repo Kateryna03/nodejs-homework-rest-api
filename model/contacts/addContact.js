@@ -8,8 +8,7 @@ const path = require("path");
 const crypto = require("crypto"); // генерирует айди
 const chalk = require("chalk"); // цветные консоли
 //const { addToContacts } = require("../../controllers/contactsControllers");
-const contactsPath = path.join(__dirname, "contacts.json"); // путь к базе
-
+const contactsPath = path.join(__dirname, "../../db/contacts.json"); // путь к базе
 const readData = async () => {
   const result = await fs.readFile(contactsPath, "utf-8");
   return JSON.parse(result);

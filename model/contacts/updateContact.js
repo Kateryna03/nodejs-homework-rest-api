@@ -6,7 +6,7 @@ const fs = require("fs/promises"); // модуль функций
 const path = require("path");
 const crypto = require("crypto"); // генерирует айди
 const chalk = require("chalk"); // цветные консоли
-const contactsPath = path.join(__dirname, "contacts.json"); // путь к базе
+const contactsPath = path.join(__dirname, "../../db/contacts.json"); // путь к базе
 
 const readData = async () => {
   const result = await fs.readFile(contactsPath, "utf-8");
