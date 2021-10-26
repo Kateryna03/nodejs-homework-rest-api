@@ -15,3 +15,32 @@ const getAllContacts = async (req, res, next) => {
 };
 
 module.exports = getAllContacts;
+// const sendSuccessRes = (res, data, status = 200) => {
+//   res.status(status).json({
+//     status: "success",
+//     code: status,
+//     data,
+//   });
+// };
+// const getAll = async (req, res) => {
+//   const result = await listContacts();
+//   sendSuccessRes(res, { result });
+// res.json({
+//     status: "success",
+//     code: 200,
+//     data: {
+//         result: products
+//     }
+// });
+//};
+// const controllerWrapper = (ctrl) => {
+//   return async (req, res, next) => {
+//     try {
+//       await ctrl(req, res, next);
+//     } catch (error) {
+//       next(error);
+//     }
+//   };
+// };
+// module.exports = getAll;
+// module.exports = controllerWrapper;

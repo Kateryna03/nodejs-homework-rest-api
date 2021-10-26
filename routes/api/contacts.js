@@ -4,13 +4,13 @@
 
 const express = require("express");
 const router = express.Router();
-const { getAllContacts } = require("../../controllers/contacts/getAllContacts");
-const { getOneContact } = require("../../controllers/contacts/getOneContact");
-const {
-  updateContactById,
-} = require("../../controllers/contacts/updateContactById");
-const { deleteContact } = require("../../controllers/contacts/deleteContact");
-const { addToContacts } = require("../../controllers/contacts/addToContacts");
+// const getAll = require("../../controllers/contacts/getAllContacts");
+// const controllerWrapper = require("../../controllers/contacts/getAllContacts");
+const getAllContacts = require("../../controllers/contacts/getAllContacts");
+const getOneContact = require("../../controllers/contacts/getOneContact");
+const updateContactById = require("../../controllers/contacts/updateContactById");
+const deleteContact = require("../../controllers/contacts/deleteContact");
+const addToContacts = require("../../controllers/contacts/addToContacts");
 // const {
 //   getAllContacts,
 //   getOneContact,
@@ -20,7 +20,7 @@ const { addToContacts } = require("../../controllers/contacts/addToContacts");
 // } = require("../../controllers/contacts");
 
 const { addPostValidation } = require("../../middlewares/validation/contacts");
-
+// router.get("/", controllerWrapper(getAll));
 router.get("/", getAllContacts);
 
 router.get("/:contactId", getOneContact);
