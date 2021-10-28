@@ -1,24 +1,34 @@
-const express = require('express')
-const router = express.Router()
+/* eslint-disable spaced-comment */
+/* eslint-disable semi */
+/* eslint-disable quotes */
 
-router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const express = require("express");
+const router = express.Router();
+// const getAll = require("../../controllers/contacts/getAllContacts");
+// const controllerWrapper = require("../../controllers/contacts/getAllContacts");
+const getAllContacts = require("../../controllers/contacts/getAllContacts");
+const getOneContact = require("../../controllers/contacts/getOneContact");
+const updateContactById = require("../../controllers/contacts/updateContactById");
+const deleteContact = require("../../controllers/contacts/deleteContact");
+const addToContacts = require("../../controllers/contacts/addToContacts");
+// const {
+//   getAllContacts,
+//   getOneContact,
+//   addToContacts,
+//   deleteContact,
+//   updateContactById,
+// } = require("../../controllers/contacts");
 
-router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+const { addPostValidation } = require("../../middlewares/validation/contacts");
+// router.get("/", controllerWrapper(getAll));
+router.get("/", getAllContacts);
 
-router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.get("/:contactId", getOneContact);
 
-router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.post("/", addPostValidation, addToContacts); //валидацию добавила и сюда и в аддКонтактс - где оставлять нужно?
 
-router.patch('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+router.delete("/:contactId", deleteContact);
 
-module.exports = router
+router.patch("/:contactId", updateContactById);
+
+module.exports = router;
