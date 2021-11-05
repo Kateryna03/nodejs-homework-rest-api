@@ -3,20 +3,23 @@
 /* eslint-disable semi */
 //const updateContact = require("../../model/contacts/updateContact");
 const { Contact } = require("../../db");
-const updateContactById = async (req, res, next) => {
+const updateStatusContact = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-      new: true,
-    });
+    const { favorite } = req.body;
+    const result = await Contact.findByIdAndUpdate(
+      contactId,
+      { favorite },
+      {
+        new: true,
+      }
+    );
     if (!result) {
-      res
-        .status(404)
-        .json({ message: `Contact with id=${contactId} not found` });
+      res.status(400).json({ message: "missing field favorite" });
     }
     res.json({
       status: "success",
-      code: 201,
+      code: 200,
       data: {
         result,
       },
@@ -26,4 +29,4 @@ const updateContactById = async (req, res, next) => {
   }
 };
 
-module.exports = updateContactById;
+module.exports = updateStatusContact;

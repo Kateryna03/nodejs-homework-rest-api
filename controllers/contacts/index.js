@@ -5,13 +5,14 @@ const getOneContact = require("./getOneContact");
 const addToContacts = require("./addToContacts");
 const updateContactById = require("./updateContactById");
 const deleteContact = require("./deleteContact");
-
+const updateStatusContac = require("./updateStatusContact");
 module.exports = {
   getAllContacts,
   getOneContact,
   updateContactById,
   deleteContact,
   addToContacts,
+  updateStatusContac,
 };
 
 // exports.index = function (req, res) {
