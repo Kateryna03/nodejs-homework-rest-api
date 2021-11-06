@@ -11,6 +11,7 @@ const getOneContact = require("../../controllers/contacts/getOneContact");
 const updateContactById = require("../../controllers/contacts/updateContactById");
 const deleteContact = require("../../controllers/contacts/deleteContact");
 const addToContacts = require("../../controllers/contacts/addToContacts");
+const updateStatusContac = require("../../controllers/contacts/updateStatusContact");
 // const {
 //   getAllContacts,
 //   getOneContact,
@@ -30,5 +31,7 @@ router.post("/", addPostValidation, addToContacts); //валидацию доб�
 router.delete("/:contactId", deleteContact);
 
 router.patch("/:contactId", updateContactById);
+
+router.patch("/:contactId/favorite", updateStatusContac);
 
 module.exports = router;
