@@ -7,7 +7,15 @@ const { Contact } = require("../../db");
 
 const getAllContacts = async (req, res, next) => {
   try {
-    const contacts = await Contact.find({});
+    const { page, limit } = req.query;
+    const { _id } = req.user;
+    const skip = (page - 1) * limit;
+    const contacts = await Contact.find(
+      { owner: _id },
+      "_id name phone email owner",
+      { skip, limit: +limit }
+    ).populate("owner", "_id email");
+
     res.status(200).json({ contacts, status: "success" });
   } catch (error) {
     next(error.message);

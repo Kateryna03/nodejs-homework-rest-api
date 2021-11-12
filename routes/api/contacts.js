@@ -19,9 +19,12 @@ const updateStatusContac = require("../../controllers/contacts/updateStatusConta
 //   deleteContact,
 //   updateContactById,
 // } = require("../../controllers/contacts");
+const { authMiddlewares } = require("../../middlewares/auth/authmiddlewares");
 
 const { addPostValidation } = require("../../middlewares/validation/contacts");
 // router.get("/", controllerWrapper(getAll));
+router.use(authMiddlewares); //все рауты пропускаю чз аутентификацию
+
 router.get("/", getAllContacts);
 
 router.get("/:contactId", getOneContact);

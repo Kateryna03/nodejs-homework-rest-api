@@ -18,10 +18,15 @@ const contactSchema = Schema(
       type: Boolean,
       default: false,
     },
+    owner: {
+      // eslint-disable-next-line no-undef
+      type: Schema.Types.ObjectId,
+      ref: "user",
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
 const Contact = model("contact", contactSchema);
 
-module.exports = Contact;
+module.exports = { Contact };
