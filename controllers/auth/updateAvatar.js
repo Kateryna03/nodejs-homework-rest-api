@@ -9,6 +9,7 @@
 //const bcrypt = require("bcryptjs");
 //const jwt = require("jsonwebtoken");
 const fs = require("fs/promises");
+const { url } = require("inspector");
 const path = require("path");
 //const { BadRequest, NotFound, Unauthorized } = require("http-errors");
 const { User } = require("../../db");
@@ -18,11 +19,12 @@ const avatarDir = path.join(__dirname, "../../public/avatars");
 console.log(avatarDir);
 
 const updateAvatar = async (req, res, next) => {
+  const { path: tempUpload, originalname } = req.file;
   try {
     console.log("HELLO");
-    const { email, _id, token } = req.user;
-    //console.log("ID", _id);
-    const user = await User.findOne(_id);
+    const { email, id, token } = req.user;
+    console.log("ID", id);
+    const user = await User.findById(id);
     //console.log(user);
     //способ №2
     if (!user) {
@@ -33,21 +35,21 @@ const updateAvatar = async (req, res, next) => {
     //   id: user._id,
     // };
     //const { id } = req.params;
-    const { path: tempUpload, originalname } = req.file;
+
     // const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
-    const resultUpload = path.join(avatarDir, _id, `${_id}_${originalname}`);
+    const resultUpload = path.join(avatarDir, id, `${id}_${originalname}`);
     await fs.rename(tempUpload, resultUpload);
-    const avatarURL = path.join(
-      "/public/avatars",
-      _id,
-      `${_id}_${originalname}`
+    const avatarURL = path.join("/public/avatars", id, `${id}_${originalname}`);
+    const result = await User.findByIdAndUpdate(
+      id,
+      { avatarURL },
+      { new: true }
     );
-    await User.findByIdAndUpdate(_id, { avatarURL: url }, { new: true });
     res.json({
       status: "success",
       code: 200,
       data: {
-        avatarURL,
+        result,
       },
     });
   } catch (error) {
