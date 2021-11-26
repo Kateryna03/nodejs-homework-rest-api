@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
     const user = await User.findOne({ email });
     //console.log(user);
     //способ №2
-    if (!user || !user.comparePassword(password)) {
+    if (!user || !user.verify || !user.comparePassword(password)) {
       res.status(401).json({ message: "Email or password is wrong" });
       //   throw new BadRequest("Wrong email or password");
     }

@@ -7,9 +7,11 @@
 //const bcrypt = require("bcryptjs");
 //const { Conflict } = require("http-errors");
 const gravatar = require("gravatar");
+const { nanoid } = require("nanoid");
 const fs = require("fs/promises");
 const path = require("path");
 const { User } = require("../../db");
+const sendMail = require("../../helpers/sendGrid/sendMail.js");
 const avatarDir = path.join(__dirname, "../../public/avatars");
 
 const register = async (req, res, next) => {
@@ -30,11 +32,20 @@ const register = async (req, res, next) => {
 
     //Хэширую пароль в модели и вызываю метод модели - создаю объект
     const avatarURL = gravatar.url(`${email}`);
-    const newUser = new User({ email, avatarURL });
+    const verificationToken = nanoid(); //генерирую вар токен
+    const newUser = new User({ email, avatarURL, verificationToken });
     //вызываю метод Юзера ктр добавляет объекту пароль захешированный
     newUser.setPassword(password);
     //сохраняю объект
     await newUser.save();
+
+    const mail = {
+      to: email,
+      subject: "Подтверждение регистрации",
+      html: `<a href="http://localhost:8086/api/auth/users/verify/${verificationToken}">Перейдите по ссылке для подтверждения</a>`,
+    };
+
+    await sendMail(mail);
     const avatarFolder = path.join(avatarDir, String(newUser._id));
     //console.log(newUser.email);
     await fs.mkdir(avatarFolder);
